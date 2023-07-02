@@ -102,7 +102,7 @@
 <div id="nextScreen" class="hidden">
   <h2>There you have it! I hope you are satisfied with this experience. Thank you for taking your time to get to this point; it means a lot to my boss. Once again, he just want you to know that he is very sorry for his insensitive actions(and even more recently too ;-;), and there's no excuse. He really meant it, probably just too dumb to express it -_-. It was only for a short time, but it was my pleasure, and I hope to see you again in another project (who knows, the boss has the final say in this anyway).</h2>
 
-  <p>Yeah, and I did not forget. The last question you can ask is... Well, you will have to ask the boss directly. The question is up to you, and he will answer ANYTHING with complete honesty. It is easy to know if he will be lying or not because it will HAVE to be a YES/NO question only (so only a 50% chance he's lying if my math is correct), please wisely choose what you want to know or show mercy and ask dumb shit like "Are you normal ?". Take a screenshot if you want to make sure he will oblige, although the boss would never go back on his word. That is it! #BOTSONOUT.</p>
+  <p>Yeah, and I did not forget. The last question you can ask is... Well, you will have to ask the boss directly. The question is up to you, and he will answer ANYTHING with complete honesty. It is easy to know if he will be lying or not because it will HAVE to be a YES/NO question only (so only a 50% chance he's lying if my math is correct), please wisely choose what you want to know or be mercy and ask dumb shit like "Are you normal ?". Take a screenshot if you want to make sure he will oblige, although the boss would never go back on his word. That is it! #BOTSONOUT.</p>
 </div>
 
 <script>
@@ -225,9 +225,46 @@ function decryptAnswer(answer) {
   return decryptedAnswer;
 }
 
-  document.addEventListener('contextmenu', function(event) {
+function checkVisited() {
+    var visited = false;
+    
+    // Check if local storage is supported
+    if (typeof(Storage) !== 'undefined') {
+      // Check if the 'visited' key is present in local storage
+      if (localStorage.getItem('visited')) {
+        visited = true;
+      } else {
+        // Website is being visited for the first time, set the 'visited' key in local storage
+        localStorage.setItem('visited', true);
+      }
+    } else {
+      // Local storage is not supported, check for the 'visited' cookie
+      if (document.cookie.indexOf('visited=true') !== -1) {
+        visited = true;
+      } else {
+        // Website is being visited for the first time, set the 'visited' cookie
+        var date = new Date();
+        date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000); // Set cookie expiration to 30 days
+        document.cookie = 'visited=true; expires=' + date.toUTCString() + '; path=/';
+      }
+    }
+
+    // Perform appropriate action based on whether the website has been visited before
+    if (visited) {
+      // Website has been visited before, perform appropriate action
+      // For example, redirect to another page or display a message
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    }
+  }
+
+  // Call the checkVisited function when the page loads
+  window.onload = checkVisited;
+
+
+document.addEventListener('contextmenu', function(event) {
       event.preventDefault();
     });
+
 </script>
 
 
